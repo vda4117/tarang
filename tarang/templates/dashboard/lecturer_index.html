@@ -1,0 +1,142 @@
+{% extends 'main.html' %} 
+
+    {% block title %}
+        <title>{{ the_title }}</title>
+    {% endblock %}
+
+
+    {% block links %}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="{{url_for('static', filename='css/sidemenu/sidemenu_layout.css')}}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/sidemenu/_all-skins.css')}}">
+        <link rel="stylesheet" href="http://cdn.jsdelivr.net/animatecss/2.1.0/animate.min.css" />
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/profile_page.css')}}">
+    {% endblock %}
+
+    {% block scripts %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    {% endblock %}
+
+
+{% block body_style %} 
+    class="hold-transition skin-blue sidebar-mini sidebar-collapse" id="body" 
+{% endblock %}
+
+{% block body %}
+    <div class="wrapper" style="background-color: white;">
+
+      <header class="main-header ">
+        <a href="/lecturer/dashboard" class="logo">
+          <span class="logo-mini"><b>TARANG</b></span>
+          <span class="logo-lg"><b>TARANG</b></span>
+        </a>
+        <nav class="navbar navbar-static-top ">
+          <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button" id="zxc" >
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+        </nav>
+      </header>
+      <aside class="main-sidebar" id="sidebar">
+        <section class="sidebar">
+          <div class="user-panel" style="background-color: black;">
+            <div class="pull-left image" style="width: 100%; max-width: 45px; height: auto;">
+              <img src="{{url_for('static', filename='img/user/user.png')}}" class="img-circle" alt="{{lecturer.name}}">
+            </div>
+            <div class="pull-left info">
+              <p>Student</p>
+              <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+            </div>
+          </div>
+          <form action="#" method="get" class="sidebar-form">
+            <div class="input-group">
+              <input type="text" name="search_input" class="form-control" placeholder="Search...">
+                  <span class="input-group-btn">
+                    <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                    </button>
+                  </span>
+            </div>
+          </form>
+          <ul class="sidebar-menu" style="background-color: black;">     
+            <li><a href="/lecturer/dashboard"><i class="fa fa-dashboard text-aqua"></i> <span>DashBoard</span></a></li>
+            <li><a href="/lecturer/assignments"><i class="fa fa-file-text text-yellow"></i> <span>Assignments</span></a></li>
+            <li><a href="/lecturer/students"><i class="fa fa-users text-aqua"></i> <span>Students</span></a></li>
+            <li><a href="/lecturer/studentsrequest"><i class="fa fa-user text-aqua"></i> <span>Students Request</span></a></li>
+            <li><a href="/lecturer/results"><i class="fa fa-circle-o text-aqua"></i> <span>Results</span></a></li>
+            <li><a href="/lecturer/logout"><i class="glyphicon glyphicon-log-out text-white"></i> <span>Logout</span></a></li>   
+          </ul>
+        </section>
+      </aside>
+
+      <div class="content-wrapper" style="margin-left: 40px;">
+        <div class="content-header">
+        	<div class="container profile_page" style="margin-top: 50px; margin-bottom: 40px;">
+        		<div class="row pagerows" >
+        			<div class="col-md-4 text-center pic">
+        				<img src="{{url_for('static', filename='img/dashboard/user.png')}}" class="img-circle" alt="name" />
+        			</div>
+        			<div class="col-md-8">
+        				<h4><strong>Name : {{lecturer.name}}</strong></h4>
+        				<p style="font-weight: bold;font-size: 16px;">Email : {{lecturer.email}}</p>
+        				<p style="font-weight: bold;font-size: 16px;">Phone : {{lecturer.phone}}</p>
+                <p style="font-weight: bold;font-size: 16px;">Designation : {{lecturer.designation}}</p>
+        				<a href="/lecturer/edit_dashboard"><button class="btn btn-primary">Edit</button></a>
+        			</div>
+        		</div>
+
+        		<br />
+
+        		<div class="row pagerows">
+        			<div class="col-md-6 text-center right" style="padding-top: 18px;">
+        				<a href="/lecturer/assignments"><img src="{{url_for('static', filename='img/dashboard/assign.png')}}" class="img-circle" alt="test series" /></a>
+        				<div class="caption"><a href="/lecturer/assignments">Assignments</a></div>
+        			</div>
+        			<div class="col-md-6 text-center" style="padding-top: 16px;">
+        				<a href="/lecturer/students"><img src="{{url_for('static', filename='img/dashboard/students.png')}}" class="img-circle" alt="assignment" /></a>
+        				<div class="caption"><a href="/lecturer/students">Students</a></div>
+        			</div>
+        		</div>
+        		<div class="row pagerows">
+        			<div class="col-md-6 text-center right" style="padding-top: 18px;">
+        				<a href="/lecturer/studentsrequest"><img src="{{url_for('static', filename='img/dashboard/request.png')}}" class="img-circle" alt="library" /></a>
+        				<div class="caption"><a href="/lecturer/studentsrequest">Students Request</a></div>
+        			</div>
+        			<div class="col-md-6 text-center" style="padding-top: 16px;">
+        				<a href="/lecturer/results"><img src="{{url_for('static', filename='img/dashboard/results.png')}}" class="img-circle" alt="locker" /></a>
+        				<div class="caption"><a href="/lecturer/results">Results</a></div>
+        			</div>
+        		</div>    		
+        	</div>
+        </div>
+      </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    <!-- pagescript -->
+    <script type="text/javascript">
+    	var c=document.getElementsByClassName("pagerows");
+    	c[0].style.border="2px solid #000";
+    	
+    	for(var i=1;i<c.length-1;i++){
+    		c[i].style.borderBottom="none";
+    	}
+    </script>
+
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="{{url_for('static', filename='js/app.js')}}"></script>
+
+    <!-- sidebar script -->
+    <script>
+        $("#header1").click(function() {
+        $("body").addClass("sidebar-collapse");
+      })
+        $("#footer1").click(function() {
+            $("body").addClass("sidebar-collapse");
+      })
+    </script>
+{% endblock %}

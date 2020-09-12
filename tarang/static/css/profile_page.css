@@ -1,0 +1,65 @@
+#sidebar{ height: 100%;
+    position: absolute;}
+@media only screen and (max-width: 766px){
+    #sidebar{
+        position:absolute;
+    }
+}
+
+.container{
+	margin-top: 10px;
+}
+
+.profile_page .col-md-8{
+	margin-top: 40px;
+}
+
+.profile_page img{
+	max-width: 203px;
+	max-height: 203px;
+}
+
+.profile_page img:hover{
+	transform: rotateY(360deg);
+	transition: transform 2s;
+}
+
+.profile_page .pic{
+	padding-bottom: 10px;
+	padding-top: 10px;
+}
+
+.profile_page .row{
+	border: 2px solid #999;
+}
+
+@media only screen and (max-width: 991px){
+	.profile_page .col-md-8{
+		text-align: center;
+		margin: auto;
+	}
+
+	.profile_page .right{
+		border-bottom: 2px solid #999;
+	}
+
+	.profile_page .pic{
+		border-bottom: 2px solid #999;
+	}
+}
+
+@media only screen and (min-width: 992px){
+
+	.profile_page .right{
+		border-right: 2px solid #999;
+	}
+
+}
+
+.profile_page a{
+	text-decoration: none;
+}
+
+.profile_page .caption{
+	font-size: 20px;
+}

@@ -1,0 +1,355 @@
+{% extends 'main.html' %}
+
+  
+{% block title %}
+    <title>{{ the_title }}</title>
+{% endblock %}
+
+{% block links %}
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="{{url_for('static', filename='css/sidemenu/sidemenu_layout.css')}}">
+  <link rel="stylesheet" href="{{url_for('static', filename='css/sidemenu/_all-skins.css')}}">
+  <link rel="stylesheet" href="http://cdn.jsdelivr.net/animatecss/2.1.0/animate.min.css" />
+  
+  <style type="text/css">
+    #sidebar{ height: 100%;
+        position: absolute;}
+    @media only screen and (max-width: 766px){
+      #sidebar{
+        position:absolute;
+      }
+    }
+
+    /*pagestyling*/
+    .container{
+      margin-top: 10px;
+    }
+
+    th{
+      background-color: #01bafd;
+      color: white;
+    }
+    .btn{
+      float: right;
+    }
+    @media only screen and (max-width: 767px){
+      .btn{
+        margin-right: 20px;
+      }
+    }
+    #a1,#b1,#c1,#p1,#q1,#r1,#x1,#y1,#z1{
+      display: none;
+    }
+
+    @media only screen and (max-width: 991px){
+      #top{
+        margin-top: 10px;
+      }
+    }
+    @media only screen and (max-width: 767px){
+      .table-responsive{
+        margin-left: 10px;
+      }
+    }
+  </style>
+{% endblock %}
+
+{% block scripts %}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+{% endblock %}
+
+
+{% block body_style %} 
+    class="hold-transition skin-blue sidebar-mini sidebar-collapse" id="body" 
+{% endblock %}
+
+{% block body %}
+
+    <div class="wrapper" style="background-color: white;">
+      <header class="main-header ">
+        <a href="/dashboard" class="logo">
+          <span class="logo-mini"><b>TARANG</b></span>
+          <span class="logo-lg"><b>TARANG</b></span>
+        </a>
+        <nav class="navbar navbar-static-top ">
+          <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button" id="zxc" >
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+        </nav>
+      </header>
+      <aside class="main-sidebar" id="sidebar">
+        <section class="sidebar">
+          <div class="user-panel" style="background-color: black;">
+            <div class="pull-left image">
+              <img src="{{url_for('static', filename='img/user/user.png')}}" class="img-circle" alt="User Image">
+            </div>
+            <div class="pull-left info">
+              <p>Student</p>
+              <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+            </div>
+          </div>
+          <form action="#" method="get" class="sidebar-form">
+            <div class="input-group">
+              <input type="text" name="search_input" class="form-control" placeholder="Search...">
+                  <span class="input-group-btn">
+                    <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                    </button>
+                  </span>
+            </div>
+          </form>
+          <ul class="sidebar-menu" style="background-color: black;">     
+            <li><a href="/dashboard"><i class="fa fa-dashboard text-aqua"></i> <span>DashBoard</span></a></li>
+            <li><a href="/notes"><i class="fa fa-file-text text-yellow"></i> <span>Notes</span></a></li>
+            <li><a href="/tests"><i class="fa fa-question text-aqua"></i> <span>Tests</span></a></li>
+            <li><a href="/lecturers"><i class="fa fa-user text-aqua"></i> <span>Teachers</span></a></li>
+            <li><a href="/results"><i class="fa fa-circle-o text-aqua"></i> <span>Results</span></a></li>
+            <li><a href="/logout"><i class="glyphicon glyphicon-log-out text-white"></i> <span>Logout</span></a></li>   
+          </ul>
+        </section>
+      </aside>
+
+      <div class="content-wrapper" style="margin-left: 40px;">
+        <div class="content-header">
+
+          <!-- content -->
+          <div class="container" style="margin-top: 50px;">
+            <div class="row" style="padding-left: 10px;">
+            <h1>Results</h1>
+            </div>
+            <div class="row">
+              <form method="POST" class="form-horizontal">
+                <div class="form-group">
+                  <div class="col-md-4" id="top" >
+                    <div style="margin:10px">
+                    <select name="batch" class="form-control" id="sub" onchange="showDiv(this)">
+                      <option value="Select Batch" selected="selected">Select Batch</option>
+                      <option id="a" value="A1">Teacher1</option>
+                      <option id="b" value="B1">Teacher2</option>
+                      <option id="c" value="C1">Teacher3</option>
+                      <option id="p" value="P1">Teacher4</option>
+                      <option id="q" value="Q1">Teacher5</option>
+                    </select>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div id="a1" class="row table-responsive">
+              <table class="table table-bordered">
+                <thead>
+                  <th>Papers</th>
+                  <th>Marks</th>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Paper1</td>
+                    <td>8/10</td>
+                  </tr>
+                  <tr>
+                    <td>Paper2</td>
+                    <td>9/10</td>
+                  </tr>
+                  <tr>
+                    <td>Paper3</td>
+                    <td>9/10</td>
+                  </tr>
+                  <tr>
+                    <td>Paper4</td>
+                    <td>9/10</td>
+                  </tr>
+                  <tr>
+                    <td>Paper5</td>
+                    <td>9/10</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div id="b1" class="row table-responsive">
+              <table class="table table-bordered">
+                <thead>
+                  <th>Papers</th>
+                  <th>Marks</th>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Economics</td>
+                    <td>8/10</td>
+                  </tr>
+                  <tr>
+                    <td>Marathi</td>
+                    <td>9/10</td>
+                  </tr>
+                  <tr>
+                    <td>Maths</td>
+                    <td>9/10</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock %}
+
+{% block footer %}
+  <!-- page script -->
+  <script type="text/javascript">
+    function hideoption(elem){
+      if(elem.value==="XI & XII"){
+        document.getElementById("p").style.display="none";
+        document.getElementById("q").style.display="none";
+        document.getElementById("r").style.display="none";
+        document.getElementById("x").style.display="none";
+        document.getElementById("y").style.display="none";
+        document.getElementById("z").style.display="none";
+        document.getElementById("a").style.display="block";
+        document.getElementById("b").style.display="block";
+        document.getElementById("c").style.display="block";
+      }
+      else if(elem.value==="CA Intermediate"){
+        document.getElementById("p").style.display="block";
+        document.getElementById("q").style.display="block";
+        document.getElementById("r").style.display="block";
+        document.getElementById("x").style.display="none";
+        document.getElementById("y").style.display="none";
+        document.getElementById("z").style.display="none";
+        document.getElementById("a").style.display="none";
+        document.getElementById("b").style.display="none";
+        document.getElementById("c").style.display="none";
+      }
+      else{
+        document.getElementById("p").style.display="none";
+        document.getElementById("q").style.display="none";
+        document.getElementById("r").style.display="none";
+        document.getElementById("x").style.display="block";
+        document.getElementById("y").style.display="block";
+        document.getElementById("z").style.display="block";
+        document.getElementById("a").style.display="none";
+        document.getElementById("b").style.display="none";
+        document.getElementById("c").style.display="none";
+      }
+    }
+    function showDiv(elem){
+      if(elem.value==="A1"){
+        document.getElementById("a1").style.display="block";
+        document.getElementById("b1").style.display="none";
+        document.getElementById("c1").style.display="none";
+        document.getElementById("p1").style.display="none";
+        document.getElementById("q1").style.display="none";
+        document.getElementById("r1").style.display="none";
+        document.getElementById("x1").style.display="none";
+        document.getElementById("y1").style.display="none";
+        document.getElementById("z1").style.display="none";
+      }
+      else if(elem.value==="B1"){
+        document.getElementById("a1").style.display="none";
+        document.getElementById("b1").style.display="block";
+        document.getElementById("c1").style.display="none";
+        document.getElementById("p1").style.display="none";
+        document.getElementById("q1").style.display="none";
+        document.getElementById("r1").style.display="none";
+        document.getElementById("x1").style.display="none";
+        document.getElementById("y1").style.display="none";
+        document.getElementById("z1").style.display="none";
+      }
+      else if(elem.value==="C1"){
+        document.getElementById("a1").style.display="none";
+        document.getElementById("b1").style.display="none";
+        document.getElementById("c1").style.display="block";
+        document.getElementById("p1").style.display="none";
+        document.getElementById("q1").style.display="none";
+        document.getElementById("r1").style.display="none";
+        document.getElementById("x1").style.display="none";
+        document.getElementById("y1").style.display="none";
+        document.getElementById("z1").style.display="none";
+      }
+      else if(elem.value==="P1"){
+        document.getElementById("a1").style.display="none";
+        document.getElementById("b1").style.display="none";
+        document.getElementById("c1").style.display="none";
+        document.getElementById("p1").style.display="block";
+        document.getElementById("q1").style.display="none";
+        document.getElementById("r1").style.display="none";
+        document.getElementById("x1").style.display="none";
+        document.getElementById("y1").style.display="none";
+        document.getElementById("z1").style.display="none";
+      }
+      else if(elem.value==="Q1"){
+        document.getElementById("a1").style.display="none";
+        document.getElementById("b1").style.display="none";
+        document.getElementById("c1").style.display="none";
+        document.getElementById("p1").style.display="none";
+        document.getElementById("q1").style.display="block";
+        document.getElementById("r1").style.display="none";
+        document.getElementById("x1").style.display="none";
+        document.getElementById("y1").style.display="none";
+        document.getElementById("z1").style.display="none";
+      }
+      else if(elem.value==="R1"){
+        document.getElementById("a1").style.display="none";
+        document.getElementById("b1").style.display="none";
+        document.getElementById("c1").style.display="none";
+        document.getElementById("p1").style.display="none";
+        document.getElementById("q1").style.display="none";
+        document.getElementById("r1").style.display="block";
+        document.getElementById("x1").style.display="none";
+        document.getElementById("y1").style.display="none";
+        document.getElementById("z1").style.display="none";
+      }
+      else if(elem.value==="X1"){
+        document.getElementById("a1").style.display="none";
+        document.getElementById("b1").style.display="none";
+        document.getElementById("c1").style.display="none";
+        document.getElementById("p1").style.display="none";
+        document.getElementById("q1").style.display="none";
+        document.getElementById("r1").style.display="none";
+        document.getElementById("x1").style.display="block";
+        document.getElementById("y1").style.display="none";
+        document.getElementById("z1").style.display="none";
+      }
+      else if(elem.value==="Y1"){
+        document.getElementById("a1").style.display="none";
+        document.getElementById("b1").style.display="none";
+        document.getElementById("c1").style.display="none";
+        document.getElementById("p1").style.display="none";
+        document.getElementById("q1").style.display="none";
+        document.getElementById("r1").style.display="none";
+        document.getElementById("x1").style.display="none";
+        document.getElementById("y1").style.display="block";
+        document.getElementById("z1").style.display="none";
+      }
+      else{
+        document.getElementById("a1").style.display="none";
+        document.getElementById("b1").style.display="none";
+        document.getElementById("c1").style.display="none";
+        document.getElementById("p1").style.display="none";
+        document.getElementById("q1").style.display="none";
+        document.getElementById("r1").style.display="none";
+        document.getElementById("x1").style.display="none";
+        document.getElementById("y1").style.display="none";
+        document.getElementById("z1").style.display="block";
+      }
+    }
+  </script>
+
+  <!-- sidebar script -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="{{url_for('static', filename='js/app.js')}}"></script>
+
+  <script>
+    $("#header1").click(function() {
+      $("body").addClass("sidebar-collapse");
+    })
+    $("#footer1").click(function() {
+      $("body").addClass("sidebar-collapse");
+    })
+  </script>
+
+{% endblock %}

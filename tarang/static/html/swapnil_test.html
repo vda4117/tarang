@@ -1,0 +1,220 @@
+<SCRIPT language="JavaScript"
+        type="text/javascript">
+function checkAnswer(quizForm, theAnswer, postAnswer, urlRight, urlWrong)
+{
+  var s = "?";
+
+  // go through the "current choices"
+  // to find the selected choice.
+  // radio boxes pointing to choices
+  // must be named "cc"
+  // change if necessary
+  //
+  var i = 0;
+  for(;i<quizForm.elements.length;i++)
+  {
+    if(("cc" ==
+        quizForm.elements[i].name) &&
+       (quizForm.elements[i].checked))
+    {
+      s = quizForm.elements[i].value;
+    }
+  }
+
+  // no choice was selected
+  //
+  if("?" == s)
+  {
+    response = "Please make a selection.";
+    return false;
+  }
+
+  // check if we have the correct
+  // choice selected
+  //
+  if(s == theAnswer)
+  {
+    response = "'"+s+"' is correct!";
+    if(urlRight)
+    {
+    document.location.href = urlRight;
+    }
+  }
+  else
+  {
+    response = "'"+s+"' is incorrect.";
+    if( urlWrong )
+    {
+    document.location.href = urlWrong;
+    }
+  }
+
+  document.getElementById(postAnswer).innerHTML = response;
+  // return "false" to indicate not to
+  // submit the form.
+  // change this to "true" if the form
+  // "action" is valid,
+  // i.e. points to a valid CGI script
+  //
+  return false;
+}
+//-->
+</SCRIPT>
+
+<div class="container">
+A set of conductors used for transmitting electrical signal is called as
+<FORM method="POST" onSubmit="return checkAnswer(this,'C','answer1');">
+<INPUT TYPE="RADIO" VALUE="A" NAME="cc"> A. Antenna<BR>
+<INPUT TYPE="RADIO" VALUE="B" NAME="cc"> B. Transmission gates<BR>
+<INPUT TYPE="RADIO" VALUE="C" NAME="cc"> C. Transmission lines<BR>
+<INPUT TYPE="RADIO" VALUE="D" NAME="cc"> D. Transformer<BR><BR>
+
+<INPUT TYPE="SUBMIT" VALUE="Check Answer"><BR>
+
+<p id="answer1"></p>
+
+</FORM>
+</div>
+
+
+<div class="container">
+ In case of a uniform transmission line which of the following is true
+
+<FORM method="POST" onSubmit="return checkAnswer(this,'B', 'answer2');">
+<INPUT TYPE="RADIO" VALUE="A" NAME="cc"> A. conductor shape, size and spacing are varying<BR>
+
+<INPUT TYPE="RADIO" VALUE="B" NAME="cc"> B. conductor shape, size, and spacing are constant, and the electrical characteristics of the conductors and the material between them are uniform <BR>
+
+<INPUT TYPE="RADIO" VALUE="C" NAME="cc"> C. electrical characteristics of the conductors and the material between them are non- uniform<BR>
+
+<INPUT TYPE="RADIO" VALUE="D" NAME="cc"> D. none of these<BR><BR>
+
+<INPUT TYPE="SUBMIT" VALUE="Check Answer"><BR>
+
+<p id="answer2"></p>
+
+</FORM>
+</div>
+
+
+
+<div class="container">
+Which of the following is not an example of uniform transmission lines
+<FORM method="POST" onSubmit="return checkAnswer(this,'D','answer3');">
+<INPUT TYPE="RADIO" VALUE="A" NAME="cc"> A. twisted pair cables<BR>
+<INPUT TYPE="RADIO" VALUE="B" NAME="cc"> B. coaxial cables<BR>
+<INPUT TYPE="RADIO" VALUE="C" NAME="cc"> C. paralle wire cables<BR>
+<INPUT TYPE="RADIO" VALUE="D" NAME="cc"> D. strip lines<BR><BR>
+
+<INPUT TYPE="SUBMIT" VALUE="Check Answer"><BR>
+
+<p id="answer3"></p>
+
+</FORM>
+</div>
+
+<div class="container">
+In order to make a efficient radiation circuit we must place
+<FORM method="POST" onSubmit="return checkAnswer(this,'C','answer4');">
+<INPUT TYPE="RADIO" VALUE="A" NAME="cc"> A. two wires which are parallel with signal current flowing in one direction and return current flowing in the opposite direction<BR>
+<INPUT TYPE="RADIO" VALUE="B" NAME="cc"> B. two wires which are parallel with signal current and return current flowing in the same direction<BR>
+<INPUT TYPE="RADIO" VALUE="C" NAME="cc"> C. two wires apart from each other with signal current and return current flowing in the same direction<BR>
+<INPUT TYPE="RADIO" VALUE="D" NAME="cc"> D. none of the above<BR><BR>
+
+<INPUT TYPE="SUBMIT" VALUE="Check Answer"><BR>
+
+<p id="answer4"></p>
+
+</FORM>
+</div>
+
+<div class="container">
+Which of the following does qualify as the definition of antenna
+<FORM method="POST" onSubmit="return checkAnswer(this,'D','answer5');">
+<INPUT TYPE="RADIO" VALUE="A" NAME="cc"> A. Antenna is a transition device<BR>
+<INPUT TYPE="RADIO" VALUE="B" NAME="cc"> B. Antenna is a transducer<BR>
+<INPUT TYPE="RADIO" VALUE="C" NAME="cc"> C. Antennas is a impedance transformer<BR>
+<INPUT TYPE="RADIO" VALUE="D" NAME="cc"> D. All of the above<BR><BR>
+
+<INPUT TYPE="SUBMIT" VALUE="Check Answer"><BR>
+
+<p id="answer5"></p>
+
+</FORM>
+</div>
+
+<div class="container">
+....... type of antenna finds application in mobile phones.
+<FORM method="POST" onSubmit="return checkAnswer(this,'A','answer6');">
+<INPUT TYPE="RADIO" VALUE="A" NAME="cc"> A. Microstrip antenna<BR>
+<INPUT TYPE="RADIO" VALUE="B" NAME="cc"> B. Dipole antenna<BR>
+<INPUT TYPE="RADIO" VALUE="C" NAME="cc"> C. Array antenna<BR>
+<INPUT TYPE="RADIO" VALUE="D" NAME="cc"> D. Aperture antenna<BR><BR>
+
+<INPUT TYPE="SUBMIT" VALUE="Check Answer"><BR>
+
+<p id="answer6"></p>
+
+</FORM>
+</div>
+
+<div class="container">
+Antennas used for receiving analog TV broadcasting signal is called as.....
+<FORM method="POST" onSubmit="return checkAnswer(this,'C','answer7');">
+<INPUT TYPE="RADIO" VALUE="A" NAME="cc"> A. Microstrip antenna<BR>
+<INPUT TYPE="RADIO" VALUE="B" NAME="cc"> B. Folded dipole antenna<BR>
+<INPUT TYPE="RADIO" VALUE="C" NAME="cc"> C. Yagi Uda antenna<BR>
+<INPUT TYPE="RADIO" VALUE="D" NAME="cc"> D. Dipole antenna<BR><BR>
+
+<INPUT TYPE="SUBMIT" VALUE="Check Answer"><BR>
+
+<p id="answer7"></p>
+
+</FORM>
+</div>
+
+
+<div class="container">
+....... conveniently flush-mounted on the skin of the aircraft or spacecraft.
+<FORM method="POST" onSubmit="return checkAnswer(this,'B','answer8');">
+<INPUT TYPE="RADIO" VALUE="A" NAME="cc"> A. Microstrip antenna<BR>
+<INPUT TYPE="RADIO" VALUE="B" NAME="cc"> B. Aperture antennas<BR>
+<INPUT TYPE="RADIO" VALUE="C" NAME="cc"> C. Yagi Uda antenna<BR>
+<INPUT TYPE="RADIO" VALUE="D" NAME="cc"> D. Wire antenna<BR><BR>
+
+<INPUT TYPE="SUBMIT" VALUE="Check Answer"><BR>
+
+<p id="answer8"></p>
+
+</FORM>
+</div>
+
+<div class="container">
+Radiation characteristics which can not be achieved using single element can be achieved using .....
+<FORM method="POST" onSubmit="return checkAnswer(this,'D','answer9');">
+<INPUT TYPE="RADIO" VALUE="A" NAME="cc"> A. Microstrip antenna<BR>
+<INPUT TYPE="RADIO" VALUE="B" NAME="cc"> B. Aperture antennas<BR>
+<INPUT TYPE="RADIO" VALUE="C" NAME="cc"> C. Wire antenna<BR>
+<INPUT TYPE="RADIO" VALUE="D" NAME="cc"> D. Array antenna<BR><BR>
+
+<INPUT TYPE="SUBMIT" VALUE="Check Answer"><BR>
+
+<p id="answer9"></p>
+
+</FORM>
+</div>
+
+<div class="container">
+Can electrical power lines (230V, 50Hz) operate as an antenna?
+<FORM method="POST" onSubmit="return checkAnswer(this,'B','answer10');">
+<INPUT TYPE="RADIO" VALUE="A" NAME="cc"> A. Yes<BR>
+<INPUT TYPE="RADIO" VALUE="B" NAME="cc"> B. No<BR>
+<INPUT TYPE="RADIO" VALUE="C" NAME="cc"> C. May me<BR>
+<INPUT TYPE="RADIO" VALUE="D" NAME="cc"> D. All of the above<BR><BR>
+
+<INPUT TYPE="SUBMIT" VALUE="Check Answer"><BR>
+
+<p id="answer10"></p>
+
+</FORM>
+</div>

@@ -1,0 +1,224 @@
+{% extends 'main.html' %}
+
+
+{% block title %}
+  <title>{{ the_title }}</title>
+{% endblock %}
+
+
+{% block links %}
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{{url_for('static', filename='css/sidemenu/sidemenu_layout.css')}}">
+
+  <link rel="stylesheet" href="{{url_for('static', filename='css/sidemenu/_all-skins.css')}}">
+  <link rel="stylesheet" href="http://cdn.jsdelivr.net/animatecss/2.1.0/animate.min.css" />
+
+  <!-- course page style -->
+  <link rel="stylesheet" href="{{url_for('static', filename='css/testseries.css')}}">
+  
+  <style type="text/css">
+    #sidebar{ height: 100%;
+        position: absolute;}
+    @media only screen and (max-width: 766px){
+      #sidebar{
+        position:absolute;
+      }
+    }
+  </style>
+
+{% endblock %}
+
+{% block scripts %}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+{% endblock %}
+
+
+{% block body_style %} 
+    class="hold-transition skin-blue sidebar-mini sidebar-collapse" id="body" 
+{% endblock %}
+
+{% block body %}  
+    <div class="wrapper" style="background-color: white;">
+
+      <header class="main-header ">
+        <a href="/dashboard" class="logo">
+          <span class="logo-mini"><b>TARANG</b></span>
+          <span class="logo-lg"><b>TARANG</b></span>
+        </a>
+        <nav class="navbar navbar-static-top ">
+          <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button" id="zxc" >
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+        </nav>
+      </header>
+      <aside class="main-sidebar" id="sidebar">
+        <section class="sidebar">
+          <div class="user-panel" style="background-color: black;">
+            <div class="pull-left image">
+              <img src="{{url_for('static', filename='img/user/user.png')}}" class="img-circle" alt="User Image">
+            </div>
+            <div class="pull-left info">
+              <p>Student</p>
+              <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+            </div>
+          </div>
+          <form action="#" method="get" class="sidebar-form">
+            <div class="input-group">
+              <input type="text" name="search_input" class="form-control" placeholder="Search...">
+                  <span class="input-group-btn">
+                    <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                    </button>
+                  </span>
+            </div>
+          </form>
+          <ul class="sidebar-menu" style="background-color: black;">     
+            <li><a href="/dashboard"><i class="fa fa-dashboard text-aqua"></i> <span>DashBoard</span></a></li>
+            <li><a href="/notes"><i class="fa fa-file-text text-yellow"></i> <span>Notes</span></a></li>
+            <li><a href="/tests"><i class="fa fa-question text-aqua"></i> <span>Tests</span></a></li>
+            <li><a href="/lecturers"><i class="fa fa-user text-aqua"></i> <span>Teachers</span></a></li>
+            <li><a href="/results"><i class="fa fa-circle-o text-aqua"></i> <span>Results</span></a></li>
+            <li><a href="/logout"><i class="glyphicon glyphicon-log-out text-white"></i> <span>Logout</span></a></li>   
+          </ul>
+        </section>
+      </aside>
+
+        <!-- content -->            
+      <div class="container">
+        <div class="row" style="margin-top: 50px;padding-left: 20px;">
+          <h1>Test Your Skills</h1>
+        </div>
+        <div class="row" style="background-color:  #d9edf7;border-color: #ebccd1;border-radius: 4px;">
+          <div class="col-md-4 col-md-offset-8">
+            <div class="testCategory">
+              <select name="lecturer_name" class="form-control" id="lecturer_name" onchange="lecturer_tests(this)">
+                <option value="all" selected="selected">All</option>
+                  {% for lecturer in lecturers %}
+                    {% if lecturer.id in request_accepted %}
+                      <option value="{{lecturer.id}}">{{lecturer.name}}</option>
+                    {% endif %}
+                  {% endfor %}
+                </select>
+            </div>
+          </div>
+        </div>
+        <hr />
+        <!-- test series panel -->  
+        <div class="row">
+          <div class="panel panel-danger">
+            {% for lecturer in lecturers %}
+              {% if lecturer.id in request_accepted %}
+                <div class="panel-heading">{{lecturer.name}}</div>
+                <div class="panel-body">
+                  <table class="table table-bordered">
+                    <thead>
+                      <th>Test Name</th>
+                      <th>Start Test</th>
+                      <th>Result</th>
+                      <th>Date To Active</th>
+                    </thead>
+                    <tbody>
+                      {% for test in tests %}
+                        {% if test.lecturer_id == lecturer.id %}
+                          <tr>
+                            <td>{{test.topic_name}}</td>
+                            <td class="text-center">
+                              <a href="/test/{{test.id}}">
+                                <button type="button" class="btn btn-primary btn-lg" data-toggle="tooltip">&nbsp;&nbsp;
+                                <i class="fa fa-angle-double-right" style="font-size: 20px">
+                                </i>&nbsp;&nbsp;
+                                </button>
+                              </a>
+                            </td>
+                            <td class="text-center">
+                              <button type="button" class="btn btn-primary btn-lg" data-toggle="tooltip">&nbsp;&nbsp;
+                              <i class="fa fa-bar-chart" style="font-size: 20px"></i>
+                              &nbsp;&nbsp;
+                              </button>
+                            </td>
+                            <td class=" ">{{test.updated_at}}</td>
+                          </tr>
+                        {% endif %}
+                      {% endfor %}
+                    </tbody>
+                  </table> 
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock %}
+
+
+{% block footer %}
+  <!-- pagescript -->
+  <!-- <script type="text/javascript">
+    
+    function toggleIcon(e) {
+        $(e.target)
+        .prev('.panel-heading')
+        .find(".more-less")
+        .toggleClass('glyphicon-plus glyphicon-minus');
+      }
+    $('.panel-group').on('hidden.bs.collapse', toggleIcon);
+    $('.panel-group').on('shown.bs.collapse', toggleIcon);
+
+      $(document).ready(function() {
+        $('[id^=paper]').hide();
+        $('.toggle').click(function() {
+          $input = $( this );
+          $target = $('#'+$input.attr('data-toggle'));
+          $target.slideToggle();
+          if($input.find('.col-xs-2 i').attr('class')=="fa fa-chevron-down pull-right")
+          {
+           $input.find('.col-xs-2 i').removeClass('fa-chevron-down');
+           $input.find('.col-xs-2 i').addClass('fa-chevron-up');
+         }
+         else if($input.find('.col-xs-2 i').attr('class')=="fa pull-right fa-chevron-up")
+         {
+           $input.find('.col-xs-2 i').removeClass('fa-chevron-up');
+           $input.find('.col-xs-2 i').addClass('fa-chevron-down');
+         }
+         else if($input.find('.col-xs-2 i').attr('class')=="fa pull-right fa-chevron-down")
+         {
+           $input.find('.col-xs-2 i').removeClass('fa-chevron-down');
+           $input.find('.col-xs-2 i').addClass('fa-chevron-up');
+         }
+
+       });
+      });
+
+  </script> -->
+
+  <!-- sidebar script -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="{{url_for('static', filename='js/app.js')}}"></script>
+
+  <script>
+    $("#header1").click(function() {
+      $("body").addClass("sidebar-collapse");
+    })
+    $("#footer1").click(function() {
+      $("body").addClass("sidebar-collapse");
+    })
+  </script>
+  
+
+  <script type="text/javascript">
+    function lecturer_tests(elem){
+      if(elem.value != 'all'){
+        window.location.replace("/tests/"+elem.value.toString());
+      }
+    }
+  </script>
+
+{% endblock %}

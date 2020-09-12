@@ -1,0 +1,205 @@
+{% extends 'main.html' %}
+
+  
+{% block title %}
+    <title>{{ the_title }}</title>
+{% endblock %}
+
+{% block links %}
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+
+	<!-- Theme style -->
+	<link rel="stylesheet" href="{{url_for('static', filename='css/sidemenu/sidemenu_layout.css')}}">
+	<link rel="stylesheet" href="{{url_for('static', filename='css/sidemenu/_all-skins.css')}}">
+	<link rel="stylesheet" href="http://cdn.jsdelivr.net/animatecss/2.1.0/animate.min.css" />
+
+	<style type="text/css">
+
+		#sidebar{ height: 100%;
+		    position: absolute;}
+		@media only screen and (max-width: 766px){
+		  #sidebar{
+		    position:absolute;
+		  }
+		}
+	/*sidemenuStyling*/
+
+		.page5 .container{
+			margin-top: 10px;
+		}
+
+		.page5 .btn{
+			float: right;
+		}
+
+		.page5 th{
+			background-color: #01bafd;
+			color: white;
+		}
+
+		@media only screen and (max-width: 767px){
+			.page5 .btn{
+				margin-right: 20px;
+			}
+
+			.page5 .table-responsive{
+				margin-left: 5px;
+			}
+		}
+
+		@media only screen and (max-width: 991px){
+			.page5 .btn{
+				margin-top: 10px;
+			}
+		}
+
+		.page5 a{
+			text-decoration: none;
+		}
+
+		.page5 a:hover{
+			text-decoration: none;
+		}
+
+		.page5 th{
+			font-size: 18px;
+		}
+
+		 #cai1,#caf1{
+			display: none;
+		}
+
+		.showcss{ display:block;}
+  	.hidecss{ display:none;}
+
+	</style>
+{% endblock %}
+
+
+{% block scripts %}
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+{% endblock %}
+
+
+{% block body_style %} 
+    class="hold-transition skin-blue sidebar-mini sidebar-collapse" id="body" 
+{% endblock %}
+
+{% block body %}
+	<div class="wrapper" style="background-color: white;">
+
+      <header class="main-header ">
+        <a href="/lecturer/dashboard" class="logo">
+          <span class="logo-mini"><b>TARANG</b></span>
+          <span class="logo-lg"><b>TARANG</b></span>
+        </a>
+        <nav class="navbar navbar-static-top ">
+          <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button" id="zxc" >
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+        </nav>
+      </header>
+      <aside class="main-sidebar" id="sidebar">
+        <section class="sidebar">
+          <div class="user-panel" style="background-color: black;">
+            <div class="pull-left image" style="width: 100%; max-width: 45px; height: auto;">
+              <img src="{{url_for('static', filename='img/user/user.png')}}" class="img-circle" alt="{{lecturer.name}}">
+            </div>
+            <div class="pull-left info">
+              <p>Lecturer</p>
+              <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+            </div>
+          </div>
+          <form action="#" method="get" class="sidebar-form">
+            <div class="input-group">
+              <input type="text" name="search_input" class="form-control" placeholder="Search...">
+                  <span class="input-group-btn">
+                    <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                    </button>
+                  </span>
+            </div>
+          </form>
+          <ul class="sidebar-menu" style="background-color: black;">     
+            <li><a href="/lecturer/dashboard"><i class="fa fa-dashboard text-aqua"></i> <span>DashBoard</span></a></li>
+            <li><a href="/lecturer/assignments"><i class="fa fa-file-text text-yellow"></i> <span>Assignments</span></a></li>
+            <li><a href="/lecturer/students"><i class="fa fa-users text-aqua"></i> <span>Students</span></a></li>
+            <li><a href="/lecturer/studentsrequest"><i class="fa fa-user text-aqua"></i> <span>Students Request</span></a></li>
+            <li><a href="/lecturer/results"><i class="fa fa-circle-o text-aqua"></i> <span>Results</span></a></li>
+            <li><a href="/lecturer/logout"><i class="glyphicon glyphicon-log-out text-white"></i> <span>Logout</span></a></li>   
+          </ul>
+        </section>
+      </aside>
+
+
+			<div class="content-wrapper" style="margin-left: 40px;">
+		    <div class="content-header">
+		    	{% if get_flashed_messages() %}
+			  		<h3 style="color: green">Successfully created a assignment</h3>
+			  	{% endif %}
+
+					<!-- content -->
+					<div class="container page5" style="margin-top: 50px">
+						<div class="row">
+							<a href="/lecturer/create_assignment"><button class="btn btn-primary" style="text-align: right;">Create Assignment</button></a>
+							<h1>Assignments</h1>
+						</div><br/>
+						
+						<div class="row table-responsive">
+							<table class="table">
+								<thead>
+									<th>Title</th>
+									<th>Edit</th>
+									<th>Delete</th>
+								</thead>
+								<tbody>
+									{% for assignment in assignments %}
+										<tr>
+											<td>
+												<h4>{{assignment.topic_name}}</h4>
+												<h5>You&nbsp;<span>3 days ago</span></h5>
+											</td>
+											<td><a href="/lecturer/edit_assignment/{{assignment.id}}"><button class="btn btn-primary" id="edit_{{assignment.id}}">Edit</button></a>
+											</td>
+											<td><button class="btn btn-primary" onclick="DeleteConformation({{assignment.id}})"> Delete </button>
+											</td>
+										</tr>
+									{% endfor %}
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+	</div>
+
+{%  endblock %}
+
+
+{% block footer %}
+	<!-- sidebar script -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="{{url_for('static', filename='js/app.js')}}"></script>
+
+	<script>
+		$("#header1").click(function() {
+		  $("body").addClass("sidebar-collapse");
+		})
+		$("#footer1").click(function() {
+		  $("body").addClass("sidebar-collapse");
+		})
+	</script>
+
+	<script type="text/javascript">
+		function DeleteConformation(id){
+			if(window.confirm("It will delete the assignment permanently"))
+				window.location.replace("/lecturer/delete_assignment/"+id.toString());
+		}
+	</script>
+
+
+{% endblock %}

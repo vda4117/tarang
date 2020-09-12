@@ -1,0 +1,114 @@
+{% extends 'main.html' %}
+
+{% block title %}
+	<title>{{the_title}}</title>
+{% endblock %}
+
+{% block links %}
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+
+	<style>
+		body {font-family: Arial, Helvetica, sans-serif;}
+		* {box-sizing: border-box}
+
+		/* Full-width input fields */
+		input[type=text], input[type=password], input[type=email], input[type=tel], select[type=text] {
+		  width: 100%;
+		  padding: 15px;
+		  margin: 5px 0 22px 0;
+		  display: inline-block;
+		  border: none;
+		  background: #f1f1f1;
+		}
+
+		input[type=text], input[type=password], input[type=email], input[type=tel], select[type=text] {
+		  background-color: #ddd;
+		  outline: none;
+		}
+
+		hr {
+		  border: 1px solid #f1f1f1;
+		  margin-bottom: 25px;
+		}
+
+		/* Set a style for all buttons */
+		button {
+		  background-color: #4CAF50;
+		  color: white;
+		  padding: 14px 20px;
+		  margin: 8px 0;
+		  border: none;
+		  cursor: pointer;
+		  width: 100%;
+		  opacity: 0.9;
+		}
+
+		button:hover {
+		  opacity:1;
+		}
+
+		/* Extra styles for the cancel button */
+		.cancelbtn {
+		  padding: 14px 20px;
+		  background-color: #f44336;
+		}
+
+		/* Float cancel and signup buttons and add an equal width */
+		.cancelbtn, .signupbtn {
+		  float: left;
+		  width: 50%;
+		}
+
+		/* Add padding to container elements */
+		.container {
+		  padding: 16px;
+		}
+
+		/* Clear floats */
+		.clearfix::after {
+		  content: "";
+		  clear: both;
+		  display: table;
+		}
+
+		/* Change styles for cancel button and signup button on extra small screens */
+		@media screen and (max-width: 500px) {
+		  .cancelbtn, .signupbtn {
+		     width: 100%;
+		  }
+		}
+	</style>
+{% endblock %}
+
+{% block scripts %}
+	<script src="{{url_for('static', filename='js/jquery-3.2.1.min.js')}}"></script>
+	<script src="{{url_for('static', filename='js/popper.js')}}"></script>
+	<script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+{% endblock %}
+
+
+
+{% block body %}
+<form action="/lecturer/create_assignment_success" method="post" style="margin-bottom: 50px;" enctype = "multipart/form-data">
+  <div class="container">
+	<!-- Flash Message if error occured -->
+  	{% if get_flashed_messages() %}
+  		<h3 style="color: red">Error occurred ! Please try again</h3>
+  	{% endif %}
+
+    <h1>Create Assignment</h1>
+    <hr>
+
+    <input type="number" name="lecturer_id" value="{{lecturer.id}}" hidden>
+
+    <label for="topic_name"><b>Assignment Topic Name</b></label>
+    <input type="text" placeholder="Enter Topic Name" name="topic_name" required><br />
+
+    <label for="zip_file"><b>Zip File</b></label>
+    <input type="file" name="zip_file" required>
+  	<div>
+    	<button type="submit" class="signupbtn">Submit</button>
+    </div>
+  </div>
+</form><br />
+{% endblock %}

@@ -1,0 +1,192 @@
+{% extends 'main.html' %}
+
+  
+{% block title %}
+    <title>{{ the_title }}</title>
+{% endblock %}
+
+
+{% block links %}
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="{{url_for('static', filename='css/sidemenu/sidemenu_layout.css')}}">
+  <link rel="stylesheet" href="{{url_for('static', filename='css/sidemenu/_all-skins.css')}}">
+
+  <style type="text/css">
+    .memberinfo{
+      margin:10px;
+    }
+    .image{
+      height:150px;
+      width:150px;
+    }
+    .topcontent{
+      padding-top:20px;
+    }
+
+    /* For Horizontal Scrolling */
+    .scrolling-wrapper {
+      overflow-x: scroll;
+      overflow-y: hidden;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+    }
+    .scrolling-wrapper .card {
+      display: inline-block;
+    }
+    
+    #sidebar{ height: 100%;
+          position: absolute;}
+      @media only screen and (max-width: 766px){
+        #sidebar{
+          position:absolute;
+        }
+      }
+  </style>
+{% endblock %}
+
+
+{% block scripts %}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+{% endblock %}
+
+
+{% block body_style %} 
+    class="hold-transition skin-blue sidebar-mini sidebar-collapse" id="body" 
+{% endblock %}
+
+{% block body %}
+    <div class="wrapper" style="background-color: white;">
+
+      <header class="main-header ">
+        <a href="/dashboard" class="logo">
+          <span class="logo-mini"><b>TARANG</b></span>
+          <span class="logo-lg"><b>TARANG</b></span>
+        </a>
+        <nav class="navbar navbar-static-top ">
+          <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button" id="zxc" >
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+        </nav>
+      </header>
+      <aside class="main-sidebar" id="sidebar">
+        <section class="sidebar">
+          <div class="user-panel" style="background-color: black;">
+            <div class="pull-left image" style="width: 100%; max-width: 45px; height: auto;">
+              <img src="{{url_for('static', filename='img/user/user.png')}}" class="img-circle" alt="User Image">
+            </div>
+            <div class="pull-left info">
+              <p>Student</p>
+              <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+            </div>
+          </div>
+          <form action="#" method="get" class="sidebar-form">
+            <div class="input-group">
+              <input type="text" name="search_input" class="form-control" placeholder="Search...">
+                  <span class="input-group-btn">
+                    <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                    </button>
+                  </span>
+            </div>
+          </form>
+          <ul class="sidebar-menu" style="background-color: black;">     
+            <li><a href="/dashboard"><i class="fa fa-dashboard text-aqua"></i> <span>DashBoard</span></a></li>
+            <li><a href="/notes"><i class="fa fa-file-text text-yellow"></i> <span>Notes</span></a></li>
+            <li><a href="/tests"><i class="fa fa-question text-aqua"></i> <span>Tests</span></a></li>
+            <li><a href="/lecturers"><i class="fa fa-user text-aqua"></i> <span>Teachers</span></a></li>
+            <li><a href="/results"><i class="fa fa-circle-o text-aqua"></i> <span>Results</span></a></li>
+            <li><a href="/logout"><i class="glyphicon glyphicon-log-out text-white"></i> <span>Logout</span></a></li>   
+          </ul>
+        </section>
+      </aside>
+
+      <div class="content-wrapper" style="margin-left: 40px;">
+        <div class="content-header">
+
+          <section class="container">
+            <h1>Lecturers</h1><br>
+            <p style="text-align:justify;">Experience has its own importance. Lecturers are one who responcible for building career of students.</p>
+          </section><br>
+
+          <section>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-9">
+
+                  {% for lecturer in lecturers %}
+                    <div style="border:1px solid black;">
+                      <div class="row memberinfo" >
+                        <div class="col-md-4">
+                          <div>
+                            <img src="{{url_for('static', filename='img/dashboard/user.png')}}" alt="member" class="image img-circle">
+                          </div><br>
+                          <!-- <div><strong>Reviews: </strong></div> -->
+                        </div>
+                        <div class="col-md-8 topcontent">
+                          <p><strong>Name:</strong> {{lecturer.name}}</p>
+                          <p><strong>Designation:</strong> {{lecturer.designation}}</p>
+                          <p><strong>Education:</strong> {{lecturer.education}}</p>
+                          <p><strong>Key Areas:</strong> {{lecturer.skills}}</p>
+                          <p>
+                            {% if lecturer.linkedin != None %}
+                              <a class="btn btn-primary" href="{{lecturer.linkedin}}" style="border-radius: 50%;" target="_blank"><i class="fa fa-linkedin"></i></a>
+                            {% endif %}
+                            {% if lecturer.github != None %}
+                              <a class="btn btn-primary" href="{{lecturer.github}}" style="border-radius: 50%;" target="_blank"><i class="fa fa-github"></i></a>
+                            {% endif %}
+                            {% if lecturer.youtube != None %}
+                              <a class="btn btn-primary" href="{{lecturer.youtube}}" style="border-radius: 50%;" target="_blank"><i class="fa fa-youtube"></i></a>
+                            {% endif %}
+                          </p>
+                          <a class="btn btn-primary" href="/lecturer_info/{{lecturer.id}}">View Profile</a>
+                          {% if lecturer.id in request_accepted %}
+                            <a class="btn btn-primary" href="/notes/{{lecturer.id}}">Notes</a>
+                            <a class="btn btn-primary" href="/tests/{{lecturer.id}}">Tests</a>
+                          {% elif lecturer.id in request_sent %}
+                            <a class="btn" href="/cancel_request/{{lecturer.id}}">Cancel Request</a>
+                          {% else %}
+                            <a class="btn btn-primary" href="/send_request/{{lecturer.id}}">Send Request</a>
+                          {% endif %}
+
+                        </div>
+                      </div>
+                    </div><br>
+                  {% endfor %}
+
+
+                </div>
+
+                <div class="col-sm-3">
+                  <b>Advertisement Section:</b>
+                  <p>Put our Advertisement here</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+        </div>
+      </div>
+    </div>
+
+{% endblock %}
+
+{% block footer %}
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="{{url_for('static', filename='js/app.js')}}"></script>
+
+  <!-- sidebar script -->
+  <script>
+    $("#header1").click(function() {
+      $("body").addClass("sidebar-collapse");
+    })
+    $("#footer1").click(function() {
+      $("body").addClass("sidebar-collapse");
+    })
+  </script>
+
+{% endblock %}

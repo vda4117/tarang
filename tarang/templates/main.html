@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        {% block title %} {% endblock %}
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        {% block links %}
+        
+        {% endblock %}
+
+        {% block scripts %}
+        {% endblock %}
+    </head>
+
+    <body {% block body_style %} {% endblock %}>
+        {% block body %}
+        {% endblock %}
+
+        {% block footer %}
+        {% endblock %}
+    </body>
+</html>
+
+<!-- 1. title
+2. links
+3. scripts
+4. body
+5. footer -->
