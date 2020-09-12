@@ -11,7 +11,7 @@ import zipfile
 app = Flask(__name__)
 app.secret_key = "Tarang_is_secret_key"
 
-app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://root:vchip@127.0.0.1:3306/tarang"
+app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://root:vishu@127.0.0.1:3306/tarang"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
